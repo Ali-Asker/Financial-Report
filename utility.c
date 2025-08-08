@@ -1,6 +1,8 @@
 #include "utility.h"
 
 int err = 0;
+
+/* Each Linked List based on category */
 static clientptr foodHead = NULL;
 static clientptr drinkHead = NULL;
 static clientptr showHead = NULL;
