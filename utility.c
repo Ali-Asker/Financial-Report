@@ -94,22 +94,30 @@ int printData(void)
 
     hours = (hours + 59) / 60; /* convert to rounded hours */
     salary = (hours * wage);
-    printf("\n /========================\\ \n");
-    printf("|     Financial Report     |\n");
-    printf(" \\========================/ \n\n");
-    printf("%d food items, generating $%d revenue.\n", foodSelection, totalRevenue);
-    printf("Chef time is %.1f hours, costing $%.2f\n", (float)hours, (float)salary);
+    printf("  ________________________");
+    printf("\n /                        \\ \n");
+    printf("(     Financial Report     )\n");
+    printf(" \\________________________/ \n\n");
+
+    /* Food Report */
+    printf("=======================================================\n");
+    printf("| FOOD STATUS                                         |\n");
+    printf("=======================================================\n");
+    printf("| %d food items, generating $%d revenue.             |\n", foodSelection, totalRevenue);
+    printf("| Chef time is %.1f hours, costing $%.2f             |\n", (float)hours, (float)salary);
 
     /* iterating drink linked list and tallying calculation */
     if ((totalRevenue - revenue) > 0)
     {
-        printf("Net profit from the kitchen is $%.2f\n", (float)(totalRevenue - salary));
-        printf("Kitchen is profitable\n");
+        printf("| Net profit from the kitchen is $%.2f               |\n", (float)(totalRevenue - salary));
+        printf("| Kitchen is profitable                               |\n");
+        printf("=======================================================\n\n");
     }
     else
     {
-        printf("Net loss from the kitchen is $%.2f\n", (float)(totalRevenue - salary) * -1);
-        printf("Kitchen isn't profitable\n");
+        printf("| Net loss from the kitchen is $%.2f                 |\n", (float)(totalRevenue - salary) * -1);
+        printf("| Kitchen isn't profitable                            |\n");
+        printf("=======================================================\n\n");
     }
 
     /* iterating drink linked list and tallying calculation */
@@ -125,31 +133,40 @@ int printData(void)
 
     roundedTaxes = (int)(taxes + .99);
 
-    printf("\n");
-    printf("%d drinks served, accumulating $%.2f in taxes due.\n", drinkSelection, (float)roundedTaxes);
-    printf("\n");
+    /* Drink Report */
+    printf("=======================================================\n");
+    printf("| DRINK STATUS                                        |\n");
+    printf("=======================================================\n");
+    printf("| %d drinks served, accumulating $%.2f in taxes due. |\n", drinkSelection, (float)roundedTaxes);
+    printf("=======================================================\n\n");
 
     totalRevenue = 0;
 
+    /* Concert/Show Report */
     /* tallying the concerts revenue and fines from noise violation */
+    printf("=======================================================\n");
+    printf("| SHOW STATUS                                         |\n");
+    printf("=======================================================\n");
     while (show != NULL)
     {
         revenue = (show->field1 * show->field2);
         totalRevenue += revenue;
-        printf("Band %s brought in $%d revenue. ", show->name, revenue);
+        printf("| Band %s brought in $%d revenue.", show->name, revenue);
         if (show->field3 == 1)
         {
             totalRevenue -= fine;
             printf("(Noise Violation)");
             if (revenue < fine)
             {
-                printf("\nNB:  %s is not profitable due to noise violations.", show->name);
+                printf("\n| NB:  %s is not profitable due to noise violations.", show->name);
             }
         }
         printf("\n");
         show = show->next;
     }
-    printf("\nTotal band revenue: $%d\n\n", totalRevenue);
+    printf("=======================================================\n");
+    printf("| Total band revenue: $%d                            |\n", totalRevenue);
+    printf("=======================================================\n\n");
 
     return err;
 }
